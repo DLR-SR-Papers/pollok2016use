@@ -1,6 +1,6 @@
 # The use of Ockhams Razor in Object-Oriented Modelling
 
-Alexander Pollok and
+[Alexander Pollok](https://github.com/alexander-pollok) and
 [Andreas Klöckner](https://github.com/akloeckner).
 
 The use of Ockhams Razor in Object-Oriented Modelling.
