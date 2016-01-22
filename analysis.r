@@ -6,6 +6,7 @@ dirname     = dirname(sys.frame(1)$ofile)
 filename    = paste(dirname,"/investigation.csv", sep="")
 logname     = paste(dirname,"/analysis.log", sep="")
 outname     = paste(dirname,"/analysis.csv", sep="")
+pdfname     = paste(dirname,"/analysis.pdf", sep="")
 data        = read.csv(filename, sep=";", dec=",")
 data$simp   = data$eq/data$sym
 
@@ -45,12 +46,17 @@ print(coef(lmLvls))
 cat("\nSignificance tests\n")
 print(summary(lmLvls))
 
-# Plot what
+# Data for plots
 data2 = aggregate(cbind(exp, time) ~ vp, FUN=mean, data=filt1)
 rownames(data2) = data2$vp
 data2 = data.frame(data2, coef(lmLvls))
-plot(data2$exp, data2$sym)
 write.table(data2, file=outname, sep=";", dec=".", row.names=FALSE, quote=FALSE)
+
+# Do the plots
+par(mfrow=c(2,1))
+plot(data2$exp, data2$time)
+plot(data2$exp, data2$sym)
+dev.copy2pdf(device=dev.cur(), file=pdfname)
 
 # Reset output redirection
 sink()
